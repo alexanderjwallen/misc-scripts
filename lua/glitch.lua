@@ -8,9 +8,13 @@ else
 	file = args[1]
 end
 
-fin = io.open(file,"rb")
+if not file:find("%.gif") then
+	error("Not a gif file")
+end
 
-fout = io.open(file:gsub(".gif","").."-glitched.gif","wb")
+fin = io.open(file,"rb")
+foutname = file:gsub(".gif","").."-glitched.gif"
+fout = io.open(foutname,"wb")
 
 for i = 1,13 do
 	fout:write(fin:read(1)) -- write header, this will always be the same
@@ -33,7 +37,8 @@ if bit32.rshift(gflags,7) == 1 then -- if we have a global color table, write ra
 	fin:close()
 	fout:close()
 else
-	error("no global table")
 	fin:close()
 	fout:close()
+	os.remove(foutname)
+	error("no global table")
 end
