@@ -19,7 +19,7 @@ end
 fin:seek("set",10) -- seek to the 9th byte of the file(yes, 9th because even files start at 1 in lua)
 gflags = sb(fin:read(1)) -- read global flags
 
-if bit32.rshift(gflags,7) == 1 then --if we have a global color table, write random garbage to it to "glitch" it
+if bit32.rshift(gflags,7) == 1 then -- if we have a global color table, write random garbage to it to "glitch" it
 	local a = bit32.band(gflags,7) + 1
 	local b = 2 ^ a
 	local gcolorlen = 3 * b
