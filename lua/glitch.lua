@@ -27,14 +27,13 @@ if bit32.rshift(gflags,7) == 1 then -- if we have a global color table, write ra
 	for i = 1,gcolorlen-1 do
 		fout:write(string.char(math.random(0,255)))
 	end
+	fin:seek("set",12+gcolorlen) -- seek to the byte right after the global color table
+	fout:write(fin:read("*all"))
+
+	fin:close()
+	fout:close()
 else
 	error("no global table")
 	fin:close()
 	fout:close()
 end
-
-fin:seek("set",12+gcolorlen) -- seek to the byte right after the global color table
-fout:write(fin:read("*all"))
-
-fin:close()
-fout:close()
