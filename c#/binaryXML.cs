@@ -47,7 +47,7 @@ namespace BinaryXML
 						return 1;
 					}
 					binaryFileIn.Close();
-					path = Path.ChangeExtension(path,"dat");
+					path = Path.ChangeExtension(path,"xml");
 					System.IO.File.WriteAllText(@path,xmlOut);
 					return 0;
 				}
